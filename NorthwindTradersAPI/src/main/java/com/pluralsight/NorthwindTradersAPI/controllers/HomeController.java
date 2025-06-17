@@ -1,6 +1,5 @@
-package com.pluralsight.NorthwindTradersAPI;
+package com.pluralsight.NorthwindTradersAPI.controllers;
 
-import ch.qos.logback.core.joran.spi.HttpUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;

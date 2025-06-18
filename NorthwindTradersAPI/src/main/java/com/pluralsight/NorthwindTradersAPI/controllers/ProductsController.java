@@ -1,6 +1,8 @@
 package com.pluralsight.NorthwindTradersAPI.controllers;
 
+import com.pluralsight.NorthwindTradersAPI.dao.ProductDAO;
 import com.pluralsight.NorthwindTradersAPI.models.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -9,34 +11,24 @@ import java.util.List;
 @RestController
 public class ProductsController {
 
+    private ProductDAO productDAO;
+
+    @Autowired
+    public ProductsController(ProductDAO productDAO) {
+        this.productDAO = productDAO;
+    }
+
     @RequestMapping(path = "/products", method = RequestMethod.GET)
     public List<Product> getProducts() {
-        ArrayList<Product> products = new ArrayList<>();
-        products.add(new Product(1, "Milk", 1, 5.99));
-        products.add(new Product(2, "Bread", 1, 5.99));
-        products.add(new Product(3, "Water", 1, 5.99));
-        products.add(new Product(4, "Shirt", 2, 5.99));
-        return products;
+
+        return productDAO.getAllProducts();
 
     }
 
-    @RequestMapping(path = "/products/{productId}", method = RequestMethod.GET)
-    public List<Product> getProducts(@PathVariable int productId) {
-        ArrayList<Product> products = new ArrayList<>();
-        products.add(new Product(1, "Milk", 1, 5.99));
-        products.add(new Product(2, "Bread", 1, 5.99));
-        products.add(new Product(3, "Water", 1, 5.99));
-        products.add(new Product(4, "Shirt", 2, 5.99));
-
-        for (Product p : products) {
-            if (p.getProductId() == productId) {
-                ArrayList<Product> resultingProducts = new ArrayList<>();
-                resultingProducts.add(p);
-                return resultingProducts;
-            }
+    @RequestMapping(path = "/products/byId/{productId}", method = RequestMethod.GET)
+    public Product getProductsById(@PathVariable int productId) {
+        return productDAO.getProductById(productId);
         }
 
-        return new ArrayList<Product>();
 
     }
-}

@@ -13,9 +13,9 @@ public class DatabaseConfig {
                           @Value("${datasource.password}") String password,
                           @Value("${datasource.url}") String url) {
 
-        this.username = "root";
-        this.password = "yearup";
-        this.url = "jdbc:mysql://localhost:3306/northwind";
+        this.username = username;
+        this.password = password;
+        this.url = url;
     }
 
 

@@ -24,7 +24,6 @@ public class JdbcProductDAO implements ProductDAO {
     public JdbcProductDAO(DatabaseConfig databaseConfig) {
         this.databaseConfig = databaseConfig;
         this.basicDataSource = new BasicDataSource();
-        BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setUrl(databaseConfig.getUrl());
         basicDataSource.setUsername(databaseConfig.getUsername());
         basicDataSource.setPassword(databaseConfig.getPassword());
@@ -110,7 +109,7 @@ public class JdbcProductDAO implements ProductDAO {
                 (ProductName,
                 SupplierID,
                 CategoryID,
-                UnitPrice
+                UnitPrice)
                 VALUES
                 (?,1,?,?)
                 """;
@@ -121,7 +120,7 @@ public class JdbcProductDAO implements ProductDAO {
 
             preparedStatement.setString(1, product.getProductName());
             preparedStatement.setInt(2, product.getCategoryId());
-            preparedStatement.setDouble(2, product.getPrice());
+            preparedStatement.setDouble(3, product.getPrice());
             int rows = preparedStatement.executeUpdate();
             try (ResultSet keys = preparedStatement.getGeneratedKeys()) {
                 while (keys.next()) {
